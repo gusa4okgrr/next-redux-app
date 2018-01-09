@@ -1,0 +1,36 @@
+{
+  "name": "challenge",
+  "version": "1.0.0",
+  "description": "Eugene Husak Challenge. Build With NextJs, Redux and Express",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "babel-plugin-styled-components": "^1.4.0",
+    "body-parser": "^1.18.2",
+    "css-loader": "^0.28.8",
+    "express": "^4.16.2",
+    "next": "^4.2.1",
+    "next-redux-wrapper": "^1.0.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.1.0",
+    "style-loader": "^0.19.1",
+    "styled-components": "^2.4.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.1.2",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1"
+  }
+}
