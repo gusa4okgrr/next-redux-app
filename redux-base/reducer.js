@@ -23,12 +23,19 @@ export const reducer = (state = initialState, action) => {
         reports: action.payload
       };
     }
-    case actionTypes.UPDATE_REPORT.SUCCESS:
+    case actionTypes.UPDATE_REPORT.SUCCESS: {
+      const reports = state.reports.map(item => (
+        item.id === action.payload.id
+          ? { ...item, status: action.payload.ticketState }
+          : item
+      ));
       return {
         ...state,
         loadingPage: false,
-        message: action.payload.message
+        message: action.payload.message,
+        reports
       };
+    }
     case actionTypes.ERROR:
       return {
         ...state,

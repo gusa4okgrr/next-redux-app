@@ -1,7 +1,7 @@
 import {
   getReportsRequest,
   updateReportRequest
-} from '../API/apiHelper';
+} from '../utils/apiHelper';
 
 // Action Types
 export const actionTypes = {
@@ -22,9 +22,9 @@ export const loadReportsActionCreator = reports => ({
   payload: reports
 });
 
-export const updateReportActionCreator = message => ({
+export const updateReportActionCreator = response => ({
   type: actionTypes.UPDATE_REPORT.SUCCESS,
-  payload: message
+  payload: response
 });
 
 export const throwError = error => ({
@@ -45,7 +45,7 @@ export const fetchReports = () => (dispatch) => {
 export const updateReport = payload => (dispatch) => {
   dispatch({ type: actionTypes.UPDATE_REPORT.REQUEST });
   return updateReportRequest(payload)
-    .then(message => dispatch(updateReportActionCreator(message)))
+    .then(response => dispatch(updateReportActionCreator(response)))
     .catch((err) => {
       dispatch(throwError(err));
     });

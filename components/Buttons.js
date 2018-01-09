@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { updateReport } from '../redux-base/actionCreators';
 
 const Container = styled.div`
   flex: 0 1 auto;
@@ -18,40 +16,22 @@ const Container = styled.div`
   }
 `;
 
-const mapDispatchToProps = {
-  updateReport
-};
-
 class Buttons extends Component {
-  handleBlock = (e) => {
-    this.props.updateReport({
-      id: e.target.id,
-      type: 'block'
-    });
+  handleBlock = () => {
+    this.props.onClick(this.props.id, 'BLOCKED');
   }
 
-  handleResolve = (e) => {
-    this.props.updateReport({
-      id: e.target.id,
-      type: 'resolve'
-    });
+  handleResolve = () => {
+    this.props.onClick(this.props.id, 'RESOLVED');
   }
 
   render() {
-    const { id } = this.props;
-
     return (
       <Container>
-        <button
-          id={id}
-          onClick={this.handleBlock}
-        >
+        <button onClick={this.handleBlock}>
           Block
         </button>
-        <button
-          id={id}
-          onClick={this.handleResolve}
-        >
+        <button onClick={this.handleResolve}>
           Resolve
         </button>
       </Container>
@@ -62,8 +42,8 @@ class Buttons extends Component {
 Buttons.propTypes = {
   // data
   id: PropTypes.string.isRequired,
-  // redux-base
-  updateReport: PropTypes.func.isRequired
+  // func
+  onClick: PropTypes.func.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(Buttons);
+export default Buttons;

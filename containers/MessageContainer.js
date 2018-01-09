@@ -2,9 +2,12 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Information from './Information';
-import Buttons from './Buttons';
-import { fetchReports } from '../redux-base/actionCreators';
+import Information from '../components/Information';
+import Buttons from '../components/Buttons';
+import {
+  fetchReports,
+  updateReport
+} from '../redux-base/actionCreators';
 
 const mapStateToProps = ({
   reports,
@@ -19,7 +22,8 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = {
-  fetchReports
+  fetchReports,
+  updateReport
 };
 
 const Container = styled.div`
@@ -29,6 +33,13 @@ const Container = styled.div`
   border-bottom: none;
   justify-content: center;
   padding: 10px;
+  background-color: ${(props) => {
+    switch (props.status) {
+      case 'BLOCKED': return 'lightpink';
+      case 'RESOLVED': return 'lightgreen';
+      default: return '';
+    }
+  }}
 `;
 
 const GreenText = styled.h2`
@@ -38,6 +49,13 @@ const GreenText = styled.h2`
 class MessageContainer extends Component {
   componentWillMount() {
     this.props.fetchReports();
+  }
+
+  handleButtonClick = (id, type) => {
+    this.props.updateReport({
+      id,
+      type
+    });
   }
 
   render() {
@@ -54,12 +72,16 @@ class MessageContainer extends Component {
         { loadingPage && (<h1>Loading reports...</h1>) }
         { message && (<GreenText>{ message }</GreenText>) }
         { !error && !loadingPage && reports.map(report => (
-          <Container key={report.id}>
+          <Container status={report.status} key={report.id}>
             <Information
+              reportId={report.id}
               state={report.state}
               payload={report.payload}
             />
-            <Buttons id={report.payload.reportId} />
+            <Buttons
+              id={report.id}
+              onClick={this.handleButtonClick}
+            />
           </Container>
         )) }
       </Fragment>
@@ -79,6 +101,7 @@ MessageContainer.propTypes = {
   ]).isRequired,
   // redux-base
   fetchReports: PropTypes.func.isRequired,
+  updateReport: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageContainer);

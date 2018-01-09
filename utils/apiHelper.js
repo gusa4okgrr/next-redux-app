@@ -7,6 +7,6 @@ export const getReportsRequest = () => (
 );
 
 export const updateReportRequest = payload => (
-  axios.put(`/report/${payload.id}`, { actionType: payload.type })
+  axios.put(`/report/${payload.id}`, { ticketState: payload.type })
     .then(res => res.data)
 );

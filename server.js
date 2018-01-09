@@ -20,7 +20,11 @@ app.prepare()
     ));
 
     server.put('/report/:id', (req, res) => (
-      res.status(200).json({ message: `Update report successful with id - ${req.params.id} to status ${req.body.actionType.toUpperCase()}` })
+      res.status(200).json({
+        id: req.params.id,
+        ticketState: req.body.ticketState,
+        message: `Update report successful with id - ${req.params.id} to status ${req.body.ticketState}`
+      })
     ));
 
     server.get('*', (req, res) => (

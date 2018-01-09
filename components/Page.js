@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import MessageContainer from './MessageContainer';
+import MessageContainer from '../containers/MessageContainer';
 
 const Page = () => (
   <Fragment>

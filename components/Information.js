@@ -29,12 +29,13 @@ const Link = styled.a`
 `;
 
 const Information = ({
+  reportId,
   state,
   payload
 }) => (
   <Container>
     <LeftInfo>
-      <div>ID: { payload.reportId }</div>
+      <div>ID: { reportId }</div>
       <div>State: { state }</div>
       <Link>Details</Link>
     </LeftInfo>
@@ -47,6 +48,7 @@ const Information = ({
 
 Information.propTypes = {
   // data
+  reportId: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
   payload: PropTypes.object.isRequired,
 };
