@@ -72,7 +72,10 @@ class MessageContainer extends Component {
         { loadingPage && (<h1>Loading reports...</h1>) }
         { message && (<GreenText>{ message }</GreenText>) }
         { !error && !loadingPage && reports.map(report => (
-          <Container status={report.status} key={report.id}>
+          <Container
+            status={report.status}
+            key={report.id}
+          >
             <Information
               reportId={report.id}
               state={report.state}
@@ -81,6 +84,7 @@ class MessageContainer extends Component {
             <Buttons
               id={report.id}
               onClick={this.handleButtonClick}
+              status={report.status}
             />
           </Container>
         )) }

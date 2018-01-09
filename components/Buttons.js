@@ -26,12 +26,14 @@ class Buttons extends Component {
   }
 
   render() {
+    const { status } = this.props;
+
     return (
       <Container>
-        <button onClick={this.handleBlock}>
+        <button disabled={status === 'BLOCKED'} onClick={this.handleBlock}>
           Block
         </button>
-        <button onClick={this.handleResolve}>
+        <button disabled={status === 'RESOLVED'} onClick={this.handleResolve}>
           Resolve
         </button>
       </Container>
@@ -42,6 +44,7 @@ class Buttons extends Component {
 Buttons.propTypes = {
   // data
   id: PropTypes.string.isRequired,
+  status: PropTypes.string,
   // func
   onClick: PropTypes.func.isRequired
 };
